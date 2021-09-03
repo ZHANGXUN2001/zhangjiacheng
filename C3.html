@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="C3.css">
+
+
+  <title>Test</title>
+</head>
+
+<body>
+  <div class="quize-contenter" id="quiz">
+    <div class="quiz-header">
+      <h2 id="question">Question Text</h2>
+      <ul>
+        <li>
+          <input type="radio" id="a" name="answer" class="answer">
+          <label id="a_text" for="a">Options</label>
+        </li>
+        <li>
+          <input type="radio" id="b" name="answer" class="answer">
+          <label id="b_text" for="b">Options</label>
+        </li>
+        <li>
+          <input type="radio" id="c" name="answer" class="answer">
+          <label id="c_text" for="c">Options</label>
+        </li>
+        <li>
+          <input type="radio" id="d" name="answer" class="answer">
+          <label id="d_text" for="d">Options</label>
+        </li>
+      </ul>
+    </div>
+    <Button id="submit">提交</Button>
+
+  </div>
+  <script>
+	  const quizData = [{
+    question: '中画幅是指介于什么之间的成像尺寸?',
+    a: "36x24mm~4x5英寸",
+    b: "32x28mm~4x5英寸",
+    c: "36x24mm~2x3英寸",
+    d: "32x28mm~4x5英寸",
+    correct: "a",
+}, {
+    question: "旁轴相机和数码相机有什么区别?",
+    a: "旁轴相机没有反光镜",
+    b: "旁轴相机不是通过镜头取景，而是通过独立取景器取景",
+    c: "旁轴相机快门动作很轻， 震动很小",
+    d: "以上都是",
+    correct: "d",
+}, {
+    question: "单反相机和微单相机有什么区别?",
+    a: "微单在体积上较单反更小，便携性更强",
+    b: "微单相机内部取消了反光镜和五菱镜等结构，取景方式为电子取景",
+    c: "单反续航较长，镜头群适配能力更好",
+    d: "以上都是",
+    correct: "d",
+}, {
+    question: "傻瓜胶片机和胶片单反有什么区别?",
+    a: "傻瓜机大部分都是固定光圈，快门可调范围很小",
+    b: "傻瓜机不能对焦，只能超焦距，取景器一般为旁轴结构",
+    c: "胶片单反除了没有机背屏幕可以回看照片之外，和现代主流单反并无太大区别",
+    d: "以上都是",
+    correct: "d",
+}, {
+
+    question: "下面支持望远效果的相机焦距是多少?",
+    a: "28-70mm",
+    b: "低于28mm",
+    c: "高于70mm",
+    d: "38-115mm",
+    correct: "c",
+}, ];
+const answerE1s = document.querySelectorAll(".answer");
+const quize = document.querySelectorAll("quiz");
+
+const questionE1 = document.getElementById("question");
+const a_text = document.getElementById("a_text");
+const b_text = document.getElementById("b_text");
+const c_text = document.getElementById("c_text");
+const d_text = document.getElementById("d_text");
+const submitBt = document.getElementById("submit");
+
+
+let currentQuiz = 0;
+let score = 0;
+loadQuize();
+
+function loadQuize() {
+    deselectAnswer();
+    const currentQuizData = quizData[currentQuiz];
+    questionE1.innerText = currentQuizData.question;
+    a_text.innerText = currentQuizData.a;
+    b_text.innerText = currentQuizData.b;
+    c_text.innerText = currentQuizData.c;
+    d_text.innerText = currentQuizData.d;
+    // currentQuestion++;
+
+};
+
+function getSelected() {
+    let answer = undefined;
+    answerE1s.forEach((answerE1) => {
+        if (answerE1.checked) {
+            answer = answerE1.id;
+        }
+    });
+    return answer;
+}
+
+function deselectAnswer() {
+    answerE1s.forEach((answerE1) => {
+        answerE1.checked = false;
+    });
+}
+
+
+
+
+submitBt.addEventListener('click', () => {
+    // check to see the answer
+    const answer = getSelected();
+    if (answer) {
+        if (answer === quizData[currentQuiz].correct) {
+            score++;
+        }
+
+        currentQuiz++;
+
+        if (currentQuiz < quizData.length) {
+            loadQuize();
+
+        } else {
+            quiz.innerHTML = `<h2> <center>你答对了${score}
+            /${quizData.length}题. <center></h2> <button onclick="location.reload();">重新开始</button> `;
+        }
+    }
+});</script>
+</body>
+
+</html>
