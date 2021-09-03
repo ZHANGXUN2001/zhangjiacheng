@@ -1,0 +1,36 @@
+/* ==========================================================================
+	#reset
+========================================================================== */
+* { padding: 0; margin: 0; outline: 0; }
+
+/* ==========================================================================
+	#base
+========================================================================== */
+html,
+body { height: 100%; }
+
+html { overflow-y: scroll; }
+
+img { border: 0; vertical-align: middle; }
+
+/* ==========================================================================
+	#containers
+========================================================================== */
+.container { position: relative; overflow: hidden; min-height: 100%; }
+
+/* ==========================================================================
+	#fullscreener
+========================================================================== */
+.fsr-container { position: relative; overflow: hidden; background-position: right top; background-repeat: no-repeat; background-size: contain; }
+.fsr-element { position: absolute; }
+.fsr-hidden { display: none; }
+
+/* ==========================================================================
+	#slider
+========================================================================== */
+.slides { list-style: none outside none; }
+.slide { float: left; }
+.slide img { display: block; }
+
+.slider-cf,
+.slider-bx { position: absolute; overflow: hidden; top: 0; left: 0; width: 100%; } 
