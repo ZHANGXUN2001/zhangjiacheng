@@ -1,0 +1,270 @@
+<!-- Button trigger modal -->
+ <!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>
+    C3
+</title>
+<link href="../../../Documents/Tencent Files/905279408/FileRecv/check.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <div class="xbj">
+        <div class="form-c">
+            <div class="qa">
+                <div class="q">
+                    <h3 class="q-item"></h3>
+                </div>
+                <div class="a">
+                    <div class="a-item start-game">Start</div>
+                    <!-- 			<div class="a-item">E36 M3</div>
+                    <div class="a-item">E92 M3</div>
+                    <div class="a-item">G80 M3</div>
+                    <div class="a-item">F80 M3</div> -->
+                </div>
+            </div>
+            <div class="progressBar">
+                <div class="bar">
+                    <div class="bar-w"></div>
+                </div>
+                <div class="next">下一题</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="fh">
+        <a href="P1.html"><img src="camera/Test/箭头 (1).png" width="100%" height="100%"></a>
+    </div>
+    <script>
+        const qa = [
+        {
+            question: "中画幅是指介于什么之间的成像尺寸",
+            correct: "36x24mm~4x5英寸",
+            incorrect: ["32x28mm~4x5英寸", "36x24mm~2x3英寸", "32x28mm~4x5英寸"]
+        },
+        {
+            question: "旁轴相机和数码相机有什么区别",
+            correct: "以上都是",
+            incorrect: ["旁轴相机没有反光镜", "旁轴相机不是通过镜头取景，而是通过独立取景器取景", "旁轴相机快门动作很轻， 震动很小"]
+        },
+        {
+            question: "单反相机和微单相机有什么区别",
+            correct: "以上都是",
+            incorrect: ["微单在体积上较单反更小，便携性更强", "微单相机内部取消了反光镜和五菱镜等结构，取景方式为电子取景", "单反续航较长，镜头群适配能力更好"]
+        },
+        {
+            question: "傻瓜胶片机和胶片单反有什么区别",
+            correct: "以上都是",
+            incorrect: ["傻瓜机大部分都是固定光圈，快门可调范围很小", "傻瓜机不能对焦，只能超焦距，取景器一般为旁轴结构", "胶片单反除了没有机背屏幕可以回看照片之外，和现代主流单反并无太大区别"]
+        },
+        {
+            question: "下面支持望远效果的相机焦距是多少",
+            correct: "高于70mm",
+            incorrect: ["28-70mm", "低于28mm", "38-115mm"]
+        }
+    ];
+    const answerContainer = document.querySelector(".a");
+    const questionCon = document.querySelector(".q");
+    const question = document.querySelector(".q-item");
+    const bar = document.querySelector(".bar");
+    const barContainer = document.querySelector(".progressBar");
+    const progressBar = document.querySelector(".bar-w");
+    const next = document.querySelector(".next");
+    const startBtn = document.querySelector(".start-game");
+    const questions = [];
+    const player = { score: 0, answers: [] };
+    let cur = 0;
+    const holder = [];
+    (() => {
+        loadQuestions(); // load questions immediately
+    })();
+    
+    function loadQuestions() {
+        qa.forEach((e) => {
+            // loop through "qa"
+            let temp = [];
+            e.incorrect.forEach((ans) => {
+                // loop through 'qa.incorrect' => place false on incorrect items
+                let obj = {
+                    response: ans,
+                    correct: false
+                };
+                temp.push(obj);
+            });
+    
+            let obj = {
+                // place true on correct items
+                response: e.correct,
+                correct: true
+            };
+            temp.push(obj);
+            let mainTemp = {
+                question: e.question,
+                options: temp, // both correct and incorrect options are stored here
+                correct: e.correct // correct answer
+            };
+            questions.push(mainTemp); // push into global
+        });
+    }
+    function newQuestion() {
+        if (cur >= questions.length) {
+            next.innerHTML = "查看成绩";
+            results();
+        } else {
+            next.innerHTML = "下一题";
+        }
+        answerContainer.innerHTML = "";
+        const el = questions[cur];
+        progess();
+        console.log(el);
+        el.options.sort(() => {
+            return 0.5 - Math.random();
+        });
+    
+        const capQuestion = el.question.charAt(0).toUpperCase() + el.question.slice(1);
+        question.textContent = `${capQuestion}?`;
+        answerContainer.innerHTML = "";
+    
+        el.options.forEach((option) => {
+            const divOption = document.createElement("div");
+            holder.push(divOption);
+            divOption.correctAnswer = el.correct;
+            divOption.que = capQuestion;
+            divOption.isITcorrect = option.correct;
+            divOption.classList.add("a-item");
+            divOption.textContent = option.response;
+            answerContainer.append(divOption);
+    
+            divOption.addEventListener("click", optSelect);
+        });
+    }
+    
+    // if selected option is T || F
+    function optSelect(e) {
+        endTurn();
+        if (e.target.isITcorrect) {
+            player.score++;
+            let obj = {
+                que: e.target.que,
+                res: e.target.textContent,
+                correct: "√",
+                qNum: cur
+            };
+            player.answers.unshift(obj);
+            e.target.style.color = "#008205";
+            e.target.style.backgroundColor = "#dbfff3";
+        } else {
+            let obj = {
+                que: e.target.que,
+                res: e.target.textContent,
+                correct: "×",
+                qNum: cur
+            };
+            player.answers.unshift(obj);
+            e.target.style.color = "#e91e63";
+            e.target.style.backgroundColor = "#ffd3e2";
+        }
+        e.target.style.cursor = "pointer";
+        // player.answers.push(temp);
+    }
+    
+    // OPTIONS not selected have a unique style
+    
+    function endTurn() {
+        holder.forEach((el) => {
+            el.removeEventListener("click", optSelect);
+            el.style.backgroundColor = "#ffffff05";
+            el.style.color = "#565656";
+            el.style.cursor = "default";
+        });
+        cur++;
+        if (cur >= questions.length) {
+            next.innerHTML = "查看成绩";
+        } else {
+            next.innerHTML = "下一题";
+        }
+    }
+    
+    function progess() {
+        bar.style.width = "60%";
+        next.classList.add("progressActive");
+        question.style.display = "block";
+    
+        const currentQ = cur + 1;
+        const progressIs = (currentQ / questions.length) * 100;
+    
+        if (progressIs === 100) {
+            next.innerHTML = "查看成绩";
+            progressBar.style.maxWidth = "100%";
+        }
+        progressBar.style.width = `${progressIs}%`;
+    }
+    startBtn.addEventListener("click", newQuestion);
+    next.addEventListener("click", () => {
+        if (cur >= questions.length) {
+            results();
+        } else {
+            newQuestion();
+        }
+    });
+    
+    // update score while answering each Q
+    
+    function results() {
+        console.log(player.score);
+        question.style.display = "block";
+        answerContainer.innerHTML = "";
+        question.textContent = `你的得分: ${player.score*20}`;
+        player.answers.forEach((ans, i) => {
+            const resultsMockup = `
+            <div class="result">
+            <div class="result-q"><span>${ans.qNum}</span> ${ans.que}</div>
+            <div>${ans.res}</div>
+            <div>${ans.correct}</div>
+            </div>`;
+            answerContainer.insertAdjacentHTML("afterbegin", resultsMockup);
+        });
+        const progressIs = (player.score / questions.length) * 100;
+      /*  next.innerHTML = `${player.score} / ${questions.length} 题`;*/
+        next.innerHTML='查看正确答案';
+    
+        if (progressIs <= 50) {
+            bar.style.backgroundColor = `#ff8585`;
+            progressBar.style.backgroundColor = `red`;
+            
+        } else if (progressIs <= 75) {
+            bar.style.backgroundColor = `#ffc582`;
+            progressBar.style.backgroundColor = `#ff8900`;
+        } else {
+            progressBar.style.backgroundColor = `#00d15e`;
+            bar.style.backgroundColor = `#bcffda`;
+        }
+    
+        progressBar.style.width = `${progressIs}%`;
+        next.addEventListener("click", () => {
+        answer();
+        });
+       
+    }
+    function restartGame() {
+        newQuestion();
+    }
+    function answer(){
+        question.style.display = "block";
+        answerContainer.innerHTML = "";
+        question.textContent = `正确答案`;
+        qa.forEach((qa) => {
+            const resultsMockup = `
+            <div class="result">
+            <div class="result-q">${qa.question}</div>
+            <div>${qa.correct}</div>
+            </div>`;
+            answerContainer.insertAdjacentHTML("afterbegin", resultsMockup);
+        });
+        next.innerHTML='';
+        
+    }
+    </script>
+</body>
+</html>
