@@ -1,0 +1,174 @@
+*{
+	margin:0;
+	padding:0;
+}
+@font-face {
+	
+	font-family: "Poppins", sans-serif;
+}
+body {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	width: 100%;
+	background-size: 100% 100%;
+	font-family: monospace;
+	margin: 0;
+}
+.cbt {
+    position:absolute;
+	left:-1vw;
+	top:7vh;
+    width: 35vw;
+	height:20vh;
+	transform: rotate(-15deg);
+	transition-delay: 30ms;
+}
+.cbt:hover {
+    transform:  rotate(15deg);
+}
+.xbj {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 600px;
+	width: 550px;
+	background-size: 100% 100%;
+	font-family: monospace;
+	margin: 0;
+}
+.form-c {
+	height: 570px;
+	width: 500px;
+	padding: 15px;
+	border-radius: 12px;
+	background-color:#568db6;
+	opacity: 0.7;
+	position: relative;
+}
+.progressBar {
+	height: 40px;
+	width: calc(100% - 60px);
+	padding: 10px;
+	background-color: #c3ffc6;
+	border-radius: 6px;
+	position: absolute;
+	bottom: 15px;
+	right: 50%;
+	transform: translate(50%, 0%);
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	overflow: hidden;
+}
+.bar {
+	height: 11px;
+	width: 100%;
+	background: #e6fff4;
+	border-radius: 100px;
+}
+	.bar-w {
+		transition: all 0.6s ease-in-out;
+		height: 100%;
+		width: 0%;
+		background-color: #00ff9c;
+		border-radius: 100px;
+	}
+.next {
+	white-space: nowrap;
+	transform: translateX(100px);
+	width: 0;
+	margin-left: auto;
+	font-size: 20px;
+	font-family:"keai";
+	color: #000000;
+	cursor: pointer;
+}
+	.next:hover {
+		color: #fff;
+	}
+
+.qa {
+	display: flex;
+	flex-direction: column;
+}
+.q h3 {
+		margin: 0.5em 0;
+	    font-family:"keai";
+		font-size: 2em;
+		color: #373737;
+	}
+.a {
+	display: flex;
+	flex-direction: column;
+}
+	.a-item {
+		padding: 15px 10px;
+		background-color:#66B9E7;
+		border-radius: 5px;
+		font-family:"keai";
+		font-size: larger;
+		color: #3b3b3b;
+		margin: 0.35em 0;
+	}
+		.a-item:hover {
+			background-color: #1a195f47;
+			transition: all 0.5s ease-in-out;
+			cursor: pointer;
+			color: rgb(255, 255, 255);
+		}
+	
+
+.progressActive {
+	transform: translateX(0px);
+	width: auto;
+	transition: transform 0.6s ease-in-out;
+}
+.start-game {
+	background-color: #dddddd !important;
+	font-family:"keai";
+	color: #1c1c1c !important;
+	font-size: 2em;
+}
+.result {
+	display: flex;
+	padding: 20px 0px;
+	justify-content: space-between;
+	border-bottom: 1px solid #333;
+	font-family:"keai";
+	font-size: larger;
+	color: #2c2c2c;
+	align-items: center;
+	flex-wrap: wrap;
+}
+	.result-q {
+		width: 200px;
+	}
+.fh {
+    position:absolute;
+    left:10vw;
+    bottom:13vh;
+	width:5vw;
+	height:8vh;
+	text-decoration:none;
+	transition-delay: 30ms;
+	transform: scale(1.5);
+}
+.fh:hover{
+	transform: scale(2);
+}
+.finish {
+    position:absolute;
+    right:10vw;
+    bottom:10vh;
+	width:10vw;
+	height:17vh;
+	text-decoration:none;
+	transition-delay: 30ms;
+	transform: scale(1.5);
+}
+.finish:hover{
+	transform: scale(2);
+}
+
