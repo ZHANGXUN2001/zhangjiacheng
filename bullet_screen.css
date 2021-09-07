@@ -2,7 +2,7 @@
 /* CSS Document */
 .container{
     width: 1000px;
-    margin: 100px auto;
+    margin: 50px auto;
     background: #e8e8e8;
     height: 500px;
     border-radius: 5px;
@@ -24,4 +24,21 @@
     background: #37a;
     color: #fff;
     cursor: pointer;
+}
+.fh {
+    position:absolute;
+    left:4vw;
+    bottom:38vh;
+	width:5vw;
+	height:8vh;
+	text-decoration:none;
+	transition-delay: 30ms;
+	transform: scale(1.5);
+}
+.bt{
+    position:absolute;
+    left:23.5vw;
+    top:0vw; 
+    width:20vw;
+	height:15vh;
 }
