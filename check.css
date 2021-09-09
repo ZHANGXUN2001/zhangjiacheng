@@ -16,6 +16,15 @@ body {
 	font-family: monospace;
 	margin: 0;
 }
+.dbt{
+    position:absolute;
+    left:36vw;
+    top:13vh;
+	width:5vw;
+	height:8vh;
+    font-size: 30px;
+}
+
 .cbt {
     position:absolute;
 	left:-1vw;
