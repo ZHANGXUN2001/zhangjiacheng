@@ -155,7 +155,8 @@ a img { border: 0; }
 .clearfix:after {width: 100%; content: ''; font-size: 0; line-height: 0; text-indent: -4000px; clear: both; display: block; }
 
 
-
+.dbt{font-size: 30px;top: 5vh;
+}
 
 
 
@@ -286,7 +287,7 @@ textarea { overflow: auto; }
 
 
 
-.navigation { position: fixed; padding-top: 33px; padding-left: 33px; background: #fff; width: 175px; height: 100%; bottom: 0; left: 0;  z-index: 999; border: 0 none; -webkit-transform: translate3d(0, 0, 0); transition: none; -webkit-transition: none;
+.navigation { position: fixed; padding-top: 33px; padding-left: 33px; background: #fff; width: 250px; height: 100%; bottom: 0; left: 0;  z-index: 999; border: 0 none; -webkit-transform: translate3d(0, 0, 0); transition: none; -webkit-transition: none;
 
 
 e
@@ -375,7 +376,7 @@ e
 
 
 .captions-holder h2, 
-.captions-holder ul li { font-size: 13px; line-height: 17px; color: #999999; }
+.captions-holder ul li { font-size: 15px; line-height: 17px; color: #999999; }
 .captions-holder ul li.caption-separator { height: 12px; }
 
 
